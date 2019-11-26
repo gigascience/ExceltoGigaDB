@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<element>
+		<project>1000 Genomes</project>
+		<image_location>1000Genomeslogo.jpg</image_location>
+	</element>
+	<element>
+		<project>Genome 10K</project>
+		<image_location>G10Klogo.jpg</image_location>
+	</element>
+	<element>
+		<project>The Institute of Botany, The Chinese Academy of Sciences</project>
+		<image_location>IB-CASlogo.jpg</image_location>
+	</element>
+	<element>
+		<project>Temasek LifeSciences Laboratory</project>
+		<image_location>TEMASEKlogo.jpg</image_location>
+	</element>
+	<element>
+		<project>International Sheep Genetics Consortium</project>
+		<image_location>ISGClogo.jpg</image_location>
+	</element>
+	<element>
+		<project>The Potato Genome Sequencing Consortium</project>
+		<image_location>PGSClogo.jpg</image_location>
+	</element>
+	<element>
+		<project>HEROIC</project>
+		<image_location>HEROIC.jpg</image_location>
+	</element>
+</root>

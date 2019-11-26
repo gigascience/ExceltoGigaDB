@@ -1,0 +1,76 @@
+**Begin: file 1 : 100679newversion.xls in process...
+ValidationTest for file/sample_id: The file name: readme_100679.txt No reference any sample/sample_id
+ValidationTest for file_size: readme_100679.txt  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: Eucalyptus-pauciflora-genome-assembly-master.zip No reference any sample/sample_id
+ValidationTest for file_size: Eucalyptus-pauciflora-genome-assembly-master.zip  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: Genome_Assembly_Assessment-master.zip No reference any sample/sample_id
+ValidationTest for file_size: Genome_Assembly_Assessment-master.zip  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: canu_1kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: canu_1kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: canu_35kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: canu_35kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_1kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: flye_1kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_35kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: flye_35kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: marvel_35kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: marvel_35kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: masurca_1kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: masurca_1kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: masurca_35kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: masurca_35kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: smartdenovo_1kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: smartdenovo_1kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: smartdenovo_35kb_final.fa No reference any sample/sample_id
+ValidationTest for file_size: smartdenovo_35kb_final.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: base-level_error_rate_final.tar.gz No reference any sample/sample_id
+ValidationTest for file_size: base-level_error_rate_final.tar.gz  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: genome_sequence_similarity.tar.gz No reference any sample/sample_id
+ValidationTest for file_size: genome_sequence_similarity.tar.gz  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: BUSCO_final.tar.gz No reference any sample/sample_id
+ValidationTest for file_size: BUSCO_final.tar.gz  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: Egra.repeat.gff No reference any sample/sample_id
+ValidationTest for file_size: Egra.repeat.gff  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: Epau.repeat.gff No reference any sample/sample_id
+ValidationTest for file_size: Epau.repeat.gff  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: canu_1kb_pilon4.vcf No reference any sample/sample_id
+ValidationTest for file_size: canu_1kb_pilon4.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: canu_35kb_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: canu_35kb_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_1kb_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: flye_1kb_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_35kb_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: flye_35kb_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: marvel_35kb_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: marvel_35kb_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: masurca_1kb_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: masurca_1kb_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: masurca_35kb_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: masurca_35kb_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: smartdenovo_1kb_purge_pilon3.vcf No reference any sample/sample_id
+ValidationTest for file_size: smartdenovo_1kb_purge_pilon3.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: smartdenovo_35kb_purge_pilon5.vcf No reference any sample/sample_id
+ValidationTest for file_size: smartdenovo_35kb_purge_pilon5.vcf  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_correct_1kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: flye_correct_1kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_correct_35kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: flye_correct_35kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_uncorrect_1kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: flye_uncorrect_1kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: flye_uncorrect_35kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: flye_uncorrect_35kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: wtdbg2_correct_1kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: wtdbg2_correct_1kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: wtdbg2_correct_35kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: wtdbg2_correct_35kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: wtdbg2_uncorrect_1kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: wtdbg2_uncorrect_1kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: wtdbg2_uncorrect_35kb_supplementary.fa No reference any sample/sample_id
+ValidationTest for file_size: wtdbg2_uncorrect_35kb_supplementary.fa  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: base-level_error_rate_supplementary.tar.gz No reference any sample/sample_id
+ValidationTest for file_size: base-level_error_rate_supplementary.tar.gz  Warning: file_size < 1
+ValidationTest for file/sample_id: The file name: BUSCO_supplementary.tar.gz No reference any sample/sample_id
+ValidationTest for file_size: BUSCO_supplementary.tar.gz  Warning: file_size < 1
+**End success: 100679newversion.xls
+The following files has some errors, thus they are not uploaded!
+[]
