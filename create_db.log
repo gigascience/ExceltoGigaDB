@@ -498,3 +498,253 @@ setval
 select setval('curation_log_id_seq',(select max(id) from curation_log )) 
 setval	
 861	
+
+-------
+05/26/2019 11:26:45
+-------
+
+select setval('attribute_id_seq',(select max(id) from attribute)) 
+setval	
+780	
+select setval('dataset_attributes_id_seq',(select max(id) from dataset_attributes)) 
+setval	
+14380	
+select setval('author_id_seq',(select max(id) from author)) 
+setval	
+11695	
+select setval('dataset_funder_id_seq',(select max(id) from dataset_funder)) 
+setval	
+1773	
+select setval('dataset_author_id_seq',(select max(id) from dataset_author)) 
+setval	
+44849	
+select setval('dataset_log_id_seq',(select max(id) from dataset_log)) 
+setval	
+4943	
+select setval('dataset_project_id_seq',(select max(id) from dataset_project )) 
+setval	
+179	
+select setval('dataset_sample_id_seq',(select max(id) from dataset_sample )) 
+setval	
+122741	
+select setval('dataset_type_id_seq',(select max(id) from dataset_type )) 
+setval	
+3125	
+select setval('dataset_id_seq',(select max(id) from dataset)) 
+setval	
+2047	
+select setval('external_link_id_seq',(select max(id) from external_link )) 
+setval	
+852	
+select setval('exp_attributes_id_seq',(select max(id) from exp_attributes)) 
+setval	
+5	
+select setval('experiment_id_seq',(select max(id) from experiment)) 
+setval	
+5	
+select setval('extdb_id_seq',(select max(id) from extdb)) 
+setval	
+2	
+select setval('external_link_id_seq',(select max(id) from external_link)) 
+setval	
+852	
+select setval('external_link_type_id_seq',(select max(id) from external_link_type)) 
+setval	
+7	
+select setval('file_attributes_id_seq',(select max(id) from file_attributes)) 
+setval	
+332349	
+select setval('file_experiment_id_seq',(select max(id) from file_experiment)) 
+setval	
+1	
+select setval('file_relationship_id_seq',(select max(id) from file_relationship)) 
+setval	
+4	
+select setval('file_sample_id_seq',(select max(id) from file_sample)) 
+setval	
+48275	
+select setval('file_id_seq',(select max(id) from file )) 
+setval	
+380991	
+select setval('file_type_id_seq',(select max(id) from file_type )) 
+setval	
+271	
+select setval('funder_name_id_seq',(select max(id) from funder_name)) 
+setval	
+23053	
+select setval('file_format_id_seq',(select max(id) from file_format )) 
+setval	
+81	
+select setval('image_id_seq',(select max(id) from image )) 
+setval	
+1812	
+select setval('link_id_seq',(select max(id) from link )) 
+setval	
+1912	
+select setval('link_prefix_id_seq',(select max(id) from prefix )) 
+setval	
+49	
+select setval('manuscript_id_seq',(select max(id) from manuscript )) 
+setval	
+1950	
+select setval('relation_id_seq',(select max(id) from relation )) 
+setval	
+285	
+select setval('relationship_id_seq',(select max(id) from relationship )) 
+setval	
+21	
+select setval('sample_id_seq',(select max(id) from sample )) 
+setval	
+120211	
+select setval('sample_attribute_id_seq',(select max(id) from sample_attribute)) 
+setval	
+961229	
+select setval('sample_experiment_id_seq',(select max(id) from sample_experiment )) 
+setval	
+2	
+select setval('sample_rel_id_seq',(select max(id) from sample_rel)) 
+setval	
+8	
+select setval('species_id_seq',(select max(id) from species )) 
+setval	
+1129768	
+select setval('project_id_seq',(select max(id) from project )) 
+setval	
+33	
+select setval('dataset_project_id_seq',(select max(id) from dataset_project )) 
+setval	
+179	
+select setval('gigadb_user_id_seq',(select max(id) from gigadb_user )) 
+setval	
+1878	
+select setval('type_id_seq',(select max(id) from type )) 
+setval	
+22	
+select setval('curation_log_id_seq',(select max(id) from curation_log )) 
+setval	
+1011	
+
+-------
+05/33/2019 11:33:02
+-------
+
+select setval('attribute_id_seq',(select max(id) from attribute)) 
+setval	
+780	
+select setval('dataset_attributes_id_seq',(select max(id) from dataset_attributes)) 
+setval	
+14388	
+select setval('author_id_seq',(select max(id) from author)) 
+setval	
+11695	
+select setval('dataset_funder_id_seq',(select max(id) from dataset_funder)) 
+setval	
+1775	
+select setval('dataset_author_id_seq',(select max(id) from dataset_author)) 
+setval	
+44856	
+select setval('dataset_log_id_seq',(select max(id) from dataset_log)) 
+setval	
+4943	
+select setval('dataset_project_id_seq',(select max(id) from dataset_project )) 
+setval	
+179	
+select setval('dataset_sample_id_seq',(select max(id) from dataset_sample )) 
+setval	
+122757	
+select setval('dataset_type_id_seq',(select max(id) from dataset_type )) 
+setval	
+3126	
+select setval('dataset_id_seq',(select max(id) from dataset)) 
+setval	
+2048	
+select setval('external_link_id_seq',(select max(id) from external_link )) 
+setval	
+853	
+select setval('exp_attributes_id_seq',(select max(id) from exp_attributes)) 
+setval	
+5	
+select setval('experiment_id_seq',(select max(id) from experiment)) 
+setval	
+5	
+select setval('extdb_id_seq',(select max(id) from extdb)) 
+setval	
+2	
+select setval('external_link_id_seq',(select max(id) from external_link)) 
+setval	
+853	
+select setval('external_link_type_id_seq',(select max(id) from external_link_type)) 
+setval	
+7	
+select setval('file_attributes_id_seq',(select max(id) from file_attributes)) 
+setval	
+332350	
+select setval('file_experiment_id_seq',(select max(id) from file_experiment)) 
+setval	
+1	
+select setval('file_relationship_id_seq',(select max(id) from file_relationship)) 
+setval	
+4	
+select setval('file_sample_id_seq',(select max(id) from file_sample)) 
+setval	
+48275	
+select setval('file_id_seq',(select max(id) from file )) 
+setval	
+381027	
+select setval('file_type_id_seq',(select max(id) from file_type )) 
+setval	
+271	
+select setval('funder_name_id_seq',(select max(id) from funder_name)) 
+setval	
+23053	
+select setval('file_format_id_seq',(select max(id) from file_format )) 
+setval	
+81	
+select setval('image_id_seq',(select max(id) from image )) 
+setval	
+1813	
+select setval('link_id_seq',(select max(id) from link )) 
+setval	
+1913	
+select setval('link_prefix_id_seq',(select max(id) from prefix )) 
+setval	
+49	
+select setval('manuscript_id_seq',(select max(id) from manuscript )) 
+setval	
+1950	
+select setval('relation_id_seq',(select max(id) from relation )) 
+setval	
+285	
+select setval('relationship_id_seq',(select max(id) from relationship )) 
+setval	
+21	
+select setval('sample_id_seq',(select max(id) from sample )) 
+setval	
+120227	
+select setval('sample_attribute_id_seq',(select max(id) from sample_attribute)) 
+setval	
+961405	
+select setval('sample_experiment_id_seq',(select max(id) from sample_experiment )) 
+setval	
+2	
+select setval('sample_rel_id_seq',(select max(id) from sample_rel)) 
+setval	
+8	
+select setval('species_id_seq',(select max(id) from species )) 
+setval	
+1129768	
+select setval('project_id_seq',(select max(id) from project )) 
+setval	
+33	
+select setval('dataset_project_id_seq',(select max(id) from dataset_project )) 
+setval	
+179	
+select setval('gigadb_user_id_seq',(select max(id) from gigadb_user )) 
+setval	
+1878	
+select setval('type_id_seq',(select max(id) from type )) 
+setval	
+22	
+select setval('curation_log_id_seq',(select max(id) from curation_log )) 
+setval	
+1011	

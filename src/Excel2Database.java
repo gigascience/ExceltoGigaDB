@@ -2275,12 +2275,10 @@ public class Excel2Database {
 			
 			//end
 			if (content == null || content.equals("")) {
-				if (attribute.equals("image_location")) {
-					record.add(locationMap.get(key));
-				} else {
-					Excel2Database.excel2DBLog.writeLine("Warning:  "+ attribute + "not exist");
-					record.add(null);
-				}
+			
+				Excel2Database.excel2DBLog.writeLine("Warning:  "+ attribute + "not exist");
+				record.add("");
+				
 			} else
 				record.add(content);
 			}
