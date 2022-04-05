@@ -3,7 +3,7 @@
 	<schemaFile>configuration/gigascience.sql</schemaFile>
 	<excelDir>dataDir</excelDir>
 	<uploadDir>uploadDir</uploadDir>
-	<databaseUrl>jdbc:postgresql://localhost:5432/gigadb_v3/</databaseUrl>
-	<databaseUserName>gigadb_jesse</databaseUserName>
-	<databasePassword>gigadb2013</databasePassword>
+	<databaseUrl>jdbc:postgresql://host.docker.internal:54321/gigadb</databaseUrl>
+	<databaseUserName>gigadb</databaseUserName>
+	<databasePassword>vagrant</databasePassword>
 </setting>
