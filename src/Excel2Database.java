@@ -2862,6 +2862,7 @@ public class Excel2Database {
 		}
 
 		table.recordList.add(record);
+	}
 	
 	public void fillTable_author() throws SQLException {
 		setInsertOrder("author");
