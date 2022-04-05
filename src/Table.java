@@ -11,7 +11,7 @@ import sun.font.CreatedFontTracker;
  */
 
 /**
- * @author þý‹æ£®æ´þý
+ * @author æ£®
  * 
  * @date 2012-3-31
  */
