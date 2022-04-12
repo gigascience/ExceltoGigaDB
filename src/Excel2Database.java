@@ -1836,7 +1836,7 @@ public class Excel2Database {
               	 System.out.println(value);
               	
           	 }else{
-          	 value= cell.getStringCellValue();
+          	 value= cell.getStringCellValue().trim();
           	 System.out.println(value);
           	 }
       	  
@@ -2735,6 +2735,9 @@ public class Excel2Database {
 					content="ftp://climb.genomics.cn/pub/10.5524/100001_101000/doi";
 					//record.add(content);
 				}
+				else if ( content.endsWith("/") == false ) {
+					content = content + "/" ;
+                }
 			}
 		/*	
 			if(attribute.equals("publication_date"))
@@ -3342,6 +3345,7 @@ public void fillTable_sample_attribute() throws SQLException, IOException{
 			ArrayList<String> record = new ArrayList<String>();
 			initRecord(record, 4);
 			String value = HelpFunctions.trim(attributeList[i]);
+			value = value.replace(" ", "");
 			record.set(index_link, value);
 			record.set(index_dataset_id, String.valueOf(dataset_id));
 			String flag= database.get_result("select id from link where dataset_id= "+ dataset_id +" and link= "+"'"+value+"'" , "id");
@@ -3361,8 +3365,15 @@ public void fillTable_sample_attribute() throws SQLException, IOException{
 		String[] attributeList1 = null;
 		int size_number1=0;
 		if (content1.length() != 0) {
+			if(content1.contains(","))
+			{
 			attributeList1 = content1.split(",");
 			size_number1 = attributeList1.length;
+			}
+			else{
+				attributeList1 = content1.split(";");
+				size_number1 = attributeList1.length;
+			}
 		}
 		
 		
@@ -3370,6 +3381,7 @@ public void fillTable_sample_attribute() throws SQLException, IOException{
 			ArrayList<String> record = new ArrayList<String>();
 			initRecord(record, 4);
 			String value = HelpFunctions.trim(attributeList1[i]);
+			value = value.replace(" ", "");
 			record.set(index_link, value);
 			record.set(index_dataset_id, String.valueOf(dataset_id));
 			String flag= database.get_result("select id from link where dataset_id= "+ dataset_id +" and link= "+"'"+value+"'" , "id");
