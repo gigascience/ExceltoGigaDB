@@ -56,6 +56,7 @@ public class Main {
 				return 0;
 			}*/
 			operation = integrityCheck.duplicate(xlsfile);
+			System.out.println("operation: " + operation);
 			if (operation == 1) {
 				System.out.println("End error: " + xlsfile.getName());
 				Excel2Database.excel2DBLog.writeLine("**End error: "
@@ -64,8 +65,12 @@ public class Main {
 				failFile.add(xlsfile.getName());
 				return operation;
 			}//add in if    || !validation.validTest(excel.schema)
-			if (!excel.fillTable() || !validation.validTest(excel.schema)) {
-				System.out.println("End error: " + xlsfile.getName());
+			Boolean fillTableOutput = excel.fillTable() ;
+			Boolean validationOutput = validation.validTest(excel.schema) ;
+			if (!fillTableOutput || !validationOutput) {
+				System.out.println("End error 1: " + xlsfile.getName());
+				System.out.println("fillTable output: " + fillTableOutput);
+				System.out.println("validation output: " + validationOutput);
 				Excel2Database.excel2DBLog.writeLine("**End error: "
 						+ xlsfile.getName());
 				Excel2Database.excel2DBLog.writeLine();
@@ -94,6 +99,7 @@ public class Main {
 				
 			}
 			try {
+			    System.out.println(">>>>>>>About to exec sqlTemp...");
 				excel.database.execute(sqlTemp);
 				System.out.println("**End success: " + xlsfile.getName());
 				Excel2Database.excel2DBLog.writeLine("**End success: "
@@ -102,6 +108,7 @@ public class Main {
 				Excel2Database.excel2DBLog.writeLine(xlsfile.getName());
 				e.printStackTrace(Excel2Database.excel2DBLog.printWriter);
 				System.out.println("End error: " + xlsfile.getName());
+				System.out.println(">>>>>>sqlTemp: " + sqlTemp);
 				Excel2Database.excel2DBLog.writeLine("**End error: "
 						+ xlsfile.getName());
 				e.printStackTrace();
