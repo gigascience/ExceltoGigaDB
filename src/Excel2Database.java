@@ -37,6 +37,8 @@ import org.apache.commons.net.*;
 import org.apache.commons.net.ftp.*;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
@@ -68,6 +70,7 @@ public class Excel2Database {
 	Projects projects;
 	String path;
 	File file;
+	FormulaEvaluator evaluator;
 	boolean isValid;
 	String datasettype;
 	ArrayList<String> sampleid= new ArrayList<String>();
@@ -141,6 +144,7 @@ public class Excel2Database {
 			samplesSheet = workbook.getSheet("Samples");
 			studySheet = workbook.getSheet("Study");
 			linkSheet = workbook.getSheet("Links");
+			evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 			schema = new Schema();
 			projects = new Projects();
 			database = new Database();
@@ -1738,9 +1742,9 @@ public class Excel2Database {
       	
       	  int columnIndex = cell.getColumnIndex(); 
       	  if(columnIndex == 0)
-               {
+          {
       		  if(cell.getCellType()==0)
-              	 {
+              {
       			  sample_id= String.valueOf(cell.getNumericCellValue());
               		 if(sample_id.endsWith(".0"))
               		 {
@@ -1749,29 +1753,55 @@ public class Excel2Database {
 		                	
 	                	 System.out.println(sample_id);
 	                	
-              	 }else{
+              }else{
               	 sample_id=  cell.getStringCellValue();
               	 System.out.println(sample_id);
-              	 }
-      		  	if(sample_id==null || sample_id=="")
-      		  	{
+              }
+      		  if(sample_id==null || sample_id=="")
+      		  {
       		  		break;
-      		  	}
-              	
-               }
-               if(columnIndex == 1)
-               {
-            	   if(cell.getCellType()==0)
-                	 {
+      		  }
+          }
+          if(columnIndex == 1)
+          {
+            	if(cell.getCellType()==0) // It's a numeric
+                {
               	 species_id= (int) cell.getNumericCellValue();
-                	 }
-            	   else
-            	   {
-            		   String temp_species_id = cell.getStringCellValue().trim();
-            		   temp_species_id=temp_species_id.replace(" ", "");
-            		   System.out.println(temp_species_id);
-            		   species_id = Integer.valueOf(temp_species_id); 
-            	   }
+                }
+               else if(cell.getCellType()==2) //It's a formula
+               {
+                  System.out.println("cell type: " + cell.getCellType());
+                  CellValue cellValue = evaluator.evaluate(cell);
+                  String temp_species_id = "";
+                  switch (cellValue.getCellType()) {
+                      case Cell.CELL_TYPE_BOOLEAN:
+                          break;
+                      case Cell.CELL_TYPE_NUMERIC:
+                          species_id = (int) cellValue.getNumberValue();
+                          break;
+                      case Cell.CELL_TYPE_STRING:
+                          temp_species_id = cellValue.getStringValue();
+                          temp_species_id=temp_species_id.replace(" ", "");
+                          species_id = Integer.valueOf(temp_species_id);
+                          break;
+                      case Cell.CELL_TYPE_BLANK:
+                          break;
+                      case Cell.CELL_TYPE_ERROR:
+                          break;
+                      case Cell.CELL_TYPE_FORMULA:
+                          break;
+                  }
+                  System.out.println(species_id);
+
+               }
+               else
+               {
+                   System.out.println("cell type: " + cell.getCellType());
+                   String temp_species_id = cell.getStringCellValue().trim();
+                   temp_species_id=temp_species_id.replace(" ", "");
+                   System.out.println(temp_species_id);
+                   species_id = Integer.valueOf(temp_species_id);
+               }
               	 
               	
               
