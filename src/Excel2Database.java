@@ -2874,15 +2874,18 @@ public class Excel2Database {
 		int size = table.attributeList.size();
 		// ArrayList<String> record=new ArrayList<String>();
 		// add author names
-		String[] nameList = getContent(studySheet, "author_list").replace(" [", "[").split(
+		String[] nameList = getContent(studySheet, "author_list").replace(" [", "[").replace("[ ", "[").replace(" ]", "]").replace("] ", "]").split(
 				";| +and +");
 		//String identifier = schema.getTable("dataset")
 			//	.getValue("identifier", 0);
 		int temp= database.getid("author");
 		for (int i = 0; i < nameList.length; i++) {
+
+		    System.out.println("author info no " + (i+1) + "/" + nameList.length);
 			ArrayList<String> record = new ArrayList<String>();
 			initRecord(record, size);
 			String author_name = HelpFunctions.trim(nameList[i]);
+
 			// add auto correct function
 			//author_name = author_name.replaceAll(" +", " ");
 			
@@ -3175,7 +3178,7 @@ public void fillTable_sample_attribute() throws SQLException, IOException{
 		int dataset_funder_id= database.getid("dataset_funder");
 		for(int i=0;i<bb.length;++i)
 		{
-			
+		System.out.println("funding info no "+ (i+1) + "/" + bb.length);
 		
 		String[] aa= bb[i].split(",");
 		String fundername=aa[0].trim().toLowerCase().replace("'", "''");
