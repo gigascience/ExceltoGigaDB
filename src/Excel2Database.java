@@ -2690,8 +2690,9 @@ public class Excel2Database {
 			
 			if(attribute.equals("excelfile"))
 			{
-				
-				content= file.getName();
+
+				String fileName = file.getName();
+				content= fileName.substring(0,fileName.length() > 50 ? 49 : fileName.length()-1);
 			}
 			
 			if(attribute.equals("excelfile_md5"))
