@@ -124,8 +124,6 @@ public class Excel2Database {
     @SuppressWarnings("static-access")
     Excel2Database(String path) throws IOException,
             ParserConfigurationException, SAXException {
-        if (!path.endsWith("xls") || !path.endsWith("xlsx"))
-            MyFrame.textArea.setText(path + " is not an excel file");
         try {
             file = new File(path);
             // file doesn't exist
@@ -160,8 +158,6 @@ public class Excel2Database {
             // TODO: handle exception
             excel2DBLog.writeLine(e.toString());
             e.printStackTrace();
-            MyFrame.textArea.setText(MyFrame.textArea.getText() + "\n" + path);
-            MyFrame.textArea.setText(MyFrame.textArea.getText() + e.toString());
         }
     }
 
