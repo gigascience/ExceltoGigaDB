@@ -49,9 +49,6 @@ public class Extension2Type {
                 if (node2 instanceof Element) {
                     String extension = node2.getTextContent();
                     map.put(extension, type);
-//					values.add(node2.getTextContent());
-//				System.out.println("扩展名:" + extension + "类型"+type);
-//							+ node2.getTextContent());
                 }
             }//for
 

@@ -13,11 +13,6 @@ public class manyXML {
         xmlGenerator = new XmlGenerator();
         for (int i = 101008; i < 101040; i++) {
             xmlGenerator.generateXml(String.valueOf(i));
-
         }
-
-
     }
-
-
 }

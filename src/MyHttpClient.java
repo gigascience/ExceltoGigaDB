@@ -57,7 +57,6 @@ public class MyHttpClient {
         int status = client.executeMethod(getMethod);
         String webpage = getMethod.getResponseBodyAsString();
         getMethod.releaseConnection();
-        // System.out.println("get web page");
         return webpage;
     }
 
@@ -65,10 +64,7 @@ public class MyHttpClient {
         String prefix = prefixMap.get("pmid");
         String postfix = "?term=" + pmid + "&presentation=xml";
         String url = HelpFunctions.getUrl(prefix, postfix);
-        // String url = prefixMap.get("pmid") + "?term=" + pmid
-        // + "&presentation=xml";
         String webpage = getWebPage(url);
-        // System.out.println(webpage);
         String beginMark = "&lt;ArticleId IdType=\"doi\"&gt;";
         String endMark = "&lt;";
         int beginIndex = webpage.indexOf(beginMark) + beginMark.length();
@@ -84,7 +80,6 @@ public class MyHttpClient {
         String postfix = "?term=" + doi + "&presentation=xml";
         String url = HelpFunctions.getUrl(prefix, postfix);
         String webpage = getWebPage(url);
-        // System.out.println(webpage);
         String beginMark = "&lt;ArticleId IdType=\"pubmed\"&gt;";
         String endMark = "&lt;";
         int beginIndex = webpage.indexOf(beginMark) + beginMark.length();
@@ -145,16 +140,11 @@ public class MyHttpClient {
             throws HttpException, IOException {
         if (postfix == null || postfix.equals("") || postfix.equals("null"))
             return true;
-        // String logon_site
-        // int LOGON_PORT=80;
         String url = HelpFunctions.getUrl(prefix, postfix);
-        // if(ur)
-        // System.out.println("**"+url+"** "+field);
 
         String urlRegex = Validation.urlRegex;
         if (!Validation.regexTest(urlRegex, url, field, log))
             return false;
-        // client.getHostConfiguration().setHost(url, LOGON_PORT);
         try {
             GetMethod getMethod = new GetMethod(url);
             int status = client.executeMethod(getMethod);
@@ -270,27 +260,6 @@ public class MyHttpClient {
         return common_name;
     }
 
-//	String getGenbank_name(String url) throws HttpException, IOException {
-//		String webpage = getWebPage(url);
-//		HashSet<String> nameSet = new HashSet<String>();
-//		String beginMark = "<em>Taxonomy ID: </em>";
-//		String endMark = "<em>Rank: </em>";
-//		int beginIndex = webpage.indexOf(beginMark) + beginMark.length();
-//		int endIndex = webpage.indexOf(endMark);
-//		String nameString = webpage.substring(beginIndex, endIndex);
-//		beginMark = "<em>Genbank common name: </em><strong>";
-//		endMark = "</strong>";
-//		beginIndex = 0;
-//
-//		beginIndex = nameString.indexOf(beginMark, beginIndex);
-//		if (beginIndex == -1)
-//			return null;
-//		beginIndex += beginMark.length();
-//		endIndex = nameString.indexOf(endMark, beginIndex);
-//		String common_name = nameString.substring(beginIndex, endIndex);
-//		return common_name;
-//	}
-
     // read xml File
     void readXmlFiles() throws ParserConfigurationException, SAXException,
             IOException {
@@ -310,7 +279,6 @@ public class MyHttpClient {
         // accessError.xml
         document = HelpFunctions.getDocument(errorInfoPath);
         element = document.getDocumentElement();
-        // System.out.println("素为:" + element.getTagName());
         childList = element.getChildNodes();
         for (int i = 0; i < childList.getLength(); i++) {
             Node node = childList.item(i);
@@ -339,10 +307,7 @@ public class MyHttpClient {
         Setting.Loadsetting();
         String doi = "10.1126/science.1211177";
         MyHttpClient myHttpClient = new MyHttpClient();
-        // System.out.println(myHttpClient.get_pmid("10.1101/gr.121392.111"));
-        // String pmid = "21940856";
-        // System.out.println(myHttpClient.get_doi(pmid));
-        // System.out.println(myHttpClient.get_sample_attributes("SRS173976"));
+
         String url = "http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=90";
         System.out.println("*" + myHttpClient.getGenbank_name(url) + "*");
     }

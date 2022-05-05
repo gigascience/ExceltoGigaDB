@@ -95,9 +95,6 @@ public class MyFrame extends JFrame implements ActionListener {
         panel.add(scrollPane);
         panel.add(clearButton);
         textArea.setBounds(0, 0, 470, 390);
-        // textArea.setEditable(false);
-        // textArea.setLineWrap(true);
-        // textArea.setAutoscrolls(true);
         openField.setBounds(10, 10, 300, 30);
         openButton.setBounds(320, 10, 80, 30);
         saveField.setBounds(10, 50, 300, 30);
@@ -108,14 +105,11 @@ public class MyFrame extends JFrame implements ActionListener {
         scrollPane.setBounds(10, 90, 470, 360);
         scrollPane.setPreferredSize(new Dimension(textArea.getWidth(), textArea
                 .getHeight()));
-        // scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane
                 .setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
-        // ScrollPane.setVerticalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane
                 .setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        // scrollPane.setEnabled(enabled)
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -131,20 +125,13 @@ public class MyFrame extends JFrame implements ActionListener {
             try {
                 // openFile(saveField);
                 textArea.setText(textArea.getText() + "in process....");
-                // this.repaint();
                 String sql = "";
                 try {
                     Excel2Database excel2Database = new Excel2Database(
                             openField.getText());
-//					textArea.setText(textArea.getText() + " here 1....");
-                    // System.out.println(openField.getText());
-//					sql = excel2Database.createInsertStmt();
-//					textArea.setText(textArea.getText() + " here 2....");
                 } catch (Exception exception) {
-//					textArea.a
                     textArea.setText(textArea.getText() + exception.toString());
                 }
-//				textArea.setText(textArea.getText() + "done");
                 textArea.setText(sql);
                 if (saveField.getText().equals(""))
                     return;
@@ -152,7 +139,6 @@ public class MyFrame extends JFrame implements ActionListener {
                 log.writeLine(sql);
 
             } catch (Exception e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
 
@@ -162,7 +148,6 @@ public class MyFrame extends JFrame implements ActionListener {
     }
 
     public void openFile(JTextField field) {
-        // fileChooser.setFileSelectionMode();
         fileChooser.setDialogTitle("open File");
         int ret = fileChooser.showOpenDialog(null);
         if (ret == JFileChooser.APPROVE_OPTION) {

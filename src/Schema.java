@@ -62,9 +62,6 @@ public class Schema {
         // Setting.Loadsetting();
         File file = new File(Setting.schemaFile);
         InputStream inputStream = new FileInputStream(file);
-        // ������件���须放于binary下面
-        // InputStream
-        // inputStream=this.getClass().getResourceAsStream("/gigascience.sql");
         BufferedReader reader = new BufferedReader(new InputStreamReader(
                 inputStream));
         String line = reader.readLine();
@@ -117,7 +114,6 @@ public class Schema {
 
     public ArrayList<String> createInsertStmt(boolean ignoreExist) {
         ArrayList<String> stmtList = new ArrayList<String>();
-        // stmt+=("begin;\n");
         for (int i = 0; i < insertOrderList.size(); i++) {
             Table table = tableList.get(insertOrderList.get(i));
             String tableName = table.name;
@@ -245,7 +241,6 @@ public class Schema {
                 // Excel2Database.database.execute(addColumn);
                 for (int j = 0; j < table.recordList.size(); j++) {
                     // add records that are not in database
-                    // table.updateWhereClause(index);
                     if (!Excel2Database.database.niexist(table, j))
                         stmtList.add(table.createInsertStmt(j, false));
                     else {
@@ -298,7 +293,6 @@ public class Schema {
                 // Excel2Database.database.execute(addColumn);
                 for (int j = 0; j < table.recordList.size(); j++) {
                     // add records that are not in database
-                    // table.updateWhereClause(index);
                     if (Excel2Database.database.completeExist(table, j))
                         ;
                     else if (Excel2Database.database.niexist(table, j)) {
@@ -370,9 +364,8 @@ public class Schema {
                         delete += " or ";
                     }
                 }//for
-//					System.out.println(delete);
+
                 stmtList.add(delete);
-                // Excel2Database.database.execute(addColumn);
                 for (int j = 0; j < table.recordList.size(); j++) {
                     // the records are all the same
                     if (Excel2Database.database.completeExist(table, j))
@@ -496,7 +489,6 @@ public class Schema {
     public static void main(String[] args) throws Exception {
         // TODO Auto-generated method stub
         Schema schema = new Schema();
-        // schema.print();
         System.out.println(schema.getClass().getProtectionDomain()
                 .getCodeSource().getLocation().getPath());
     }

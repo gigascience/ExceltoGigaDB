@@ -28,12 +28,10 @@ public class XmlGenerator {
 
     //
     void generateXml(String identifier) throws SQLException, IOException {
-        //String path = "metadataDir/" + identifier.replace("/", "_") + ".xml";
         String path = "metadataDir/" + identifier + ".xml";
         Log xmlFile = new Log(path, false);
         String id = database.get_result("select id from dataset where identifier=" + "'" + identifier + "'", "id");
 
-        //ArrayList<String> author_id= database.get_result_more("select author_id from dataset_author where dataset_id="+id, "author_id");
         ArrayList<String> creatorList = new ArrayList<String>();
 
         String statement = "select author.first_name, author.middle_name, author.surname, author.orcid from author, dataset_author where dataset_author.author_id= author.id and dataset_author.dataset_id=" + id + " order by dataset_author.rank;";
@@ -54,8 +52,6 @@ public class XmlGenerator {
         while (resultSet.next()) {
             title = resultSet.getString(1);
 
-            //title = title.replace("<", "&lt;");
-            //title = title.replace(">", "&gt;");
             title = title.replace("<em>", "");
             title = title.replace("</em>", "");
 
@@ -113,7 +109,6 @@ public class XmlGenerator {
         String language = "eng";
         ArrayList<String> subjects = new ArrayList<String>();
         // subject
-        //String dataset_type_id=database.get_result("select type_id from dataset_type where dataset_id="+id, "type_id");
         query = "select type.name from type, dataset_type where dataset_type.type_id=type.id and dataset_type.dataset_id='"
                 + id + "';";
         resultSet = database.get_result_resultset(query);
@@ -165,7 +160,6 @@ public class XmlGenerator {
         // 0: B, 1: KB, 2: MB 3: GB 4. TB
         int level = 0;
         String[] unit = {"B", "KB", "MB", "GB", "TB"};
-        // long temp=size;
         while (size >= 512) {
             size = (size + 512) / 1024;
             System.out.println("level before" + level);
@@ -183,15 +177,11 @@ public class XmlGenerator {
         String description = null;
         while (resultSet.next()) {
             description = resultSet.getString(1);
-            //description = description.replace("<", "&lt;");
-            //description = description.replace(">", "&gt;");
         }
 
         description = description.replace("<em>", "");
         description = description.replace("</em>", "");
 
-
-        //description= description.replaceAll("<a[^>]*>[\\d\\D]*?>", "");
         description = description.replaceAll("<a href=\"([^\"]*)\"*[\\d\\D]*?>", "");
         description = description.replace("<a >", "");
         description = description.replace("</a>", "");
@@ -237,11 +227,6 @@ public class XmlGenerator {
             xml += "\t<publicationYear>@</publicationYear>\n".replace("@",
                     publicationYear);
         }
-
-
-        //System.out.print(publicationYear);
-        // date
-        //xml += "\t<uploadstatus>@</uploadstatus>\n".replace("@", upload_status);
 
         // subject
         if (subjects.size() > 0) {
@@ -292,11 +277,6 @@ public class XmlGenerator {
             }
             xml += "\t</relatedIdentifiers>\n";
         }
-        //}
-        // // relatedIdentifierTYpe
-        //	 xml +="\t<relatedIdentifierType> relatedIdentifierType=\"DOI\" relationType="@".replace(
-        // "@", "DOI");
-        // xml += "\t<relationType>@</relationType>\n".replace("@", "Cites");
         // size
         xml += "\t<sizes>\n\t\t<size>@</size>\n\t</sizes>\n".replace("@",
                 sizeString);
@@ -310,9 +290,6 @@ public class XmlGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        // XmlGenerator xmlGenerator = new XmlGenerator();
-        // xmlGenerator.generateXml("10.5524/100003",
-        // "metadataDir/metadata.xml");
         if (args.length > 0) {
             XmlGenerator xmlGenerator = new XmlGenerator();
             System.out.println("get outside arguments!");
@@ -322,7 +299,6 @@ public class XmlGenerator {
             return;
         }
         XmlGenerator xmlGenerator = new XmlGenerator();
-        //xmlGenerator.generateXml("10.5524/100031");
         xmlGenerator.generateXml("102163");
     }
 }

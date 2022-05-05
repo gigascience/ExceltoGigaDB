@@ -260,8 +260,6 @@ public class Table {
         String where = " where ";
         ArrayList<String> valueList = formatRecordList.get(index);
         for (int j = 0; j < valueList.size(); j++) {
-//			if (attributeList.get(j).equals("identifier"))
-//				where += (attributeList.get(j) + " = '0' ");
             if (valueList.get(j) == null)
                 where += (attributeList.get(j) + " is null");
             else
@@ -304,8 +302,6 @@ public class Table {
         formatRecordList = HelpFunctions.copyList(recordList);
         for (int i = 0; i < formatRecordList.size(); i++) {
             ArrayList<String> record = formatRecordList.get(i);
-//			System.out.println("record size: "+record.size());
-//			System.out.println("type size: "+typeList.size());
             for (int j = 0; j < record.size(); j++) {
                 String value = record.get(j);
                 if (value == null)
@@ -356,11 +352,7 @@ public class Table {
         recordList.get(index).set(i, value);
     }
 
-    // // just valid
-    // public String setValue(String attribute,String value){
-    // int index=getIndex(attribute);
-    // re
-    // }
+
     public String process(String temp) {
         return temp.replaceAll("'", "''");
     }

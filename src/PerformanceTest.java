@@ -96,39 +96,12 @@ public class PerformanceTest {
                         excel.database.execute("commit;");
                         Long endTime1 = System.currentTimeMillis();
                         time1 += (endTime1 - beginTime1);
-//						time1 += excel.database.execute(sqlTemp1);	
-//						time2+= excel.database.execute(sqlTemp2);
-//						time3 += excel.database.execute(sqlTemp3);
                     }
                     System.out.println("use the delete SQL statements, Time: " + time0 / count);
                     System.out.println("just delete and then insert, Time: " + time1 / count);
                     timeFile.writeLine(file.getName() + " " + bytes + " " + fileCount + " " + time0 + " " + time1);
                 }
-//				else {
-//					sqlTemp = excel.createInsertStmt(false);
-//				}
-//				
-//				try {
-////					System.out.println("here");
-//					excel.database.execute("begin;");
-//					excel.database.execute(sqlTemp);
-//					System.out.println("**End success: " + file.getName());
-//					Excel2Database.excel2DBLog.writeLine("**End success: "
-//							+ file.getName());
-//				} catch (Exception e) {
-//					// TODO: handle exception
-////					System.out.println()
-//					excel.database.execute("rollback;");
-//					failFile.add(file.getName());
-//					Excel2Database.excel2DBLog.writeLine(file.getName());
-//					e.printStackTrace(Excel2Database.excel2DBLog.printWriter);
-//					System.out.println("End error: " + file.getName());
-//					Excel2Database.excel2DBLog.writeLine("**End error: "
-//							+ file.getName());
-//					e.printStackTrace();
-//				}
-//				excel.database.execute("commit;");
-//				logTemp.write(sqlTemp);
+
             }
             // new line
             Excel2Database.excel2DBLog.writeLine();

@@ -26,10 +26,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.xml.parsers.ParserConfigurationException;
 
-//import jxl.Cell;
-//import jxl.Sheet;
-//import jxl.Workbook;
-
 
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.net.*;
@@ -191,23 +187,6 @@ public class Excel2Database {
         return result;
     }
 
-    //	// get a filed's order in the database table
-//	public ArrayList<Integer> getIndexList(Table table,Sheet sheet){
-//		ArrayList<Integer> indexList = new ArrayList<Integer>();
-//		for (int col = 0; col < sheet.getColumns(); col++) {
-//			Cell cell = sheet.getCell(col, 1);
-//			// the release-data is data-stamp
-//			String attribute = HelpFunctions.trim(cell.getContents());
-//			if (attribute.equals("release_date"))
-//				attribute = "date_stamp";
-//			if (attribute.equals("file_path"))
-//				attribute = "file_location";
-//			if (attribute.length() == 0)
-//				break;
-//			int index = table.getIndex(attribute);
-//			indexList.add(index);
-//		}
-//	}
     public void comparison() throws SQLException, IOException {
 
         String identifier = getIdentifier();
@@ -729,8 +708,6 @@ public class Excel2Database {
 
         Table table = schema.getTable("file");
         int size = table.recordList.size();
-        //	ArrayList <String> file_type= database.get_result_more("select file_type.name from file, file_type where file.dataset_id="+dataset_id+" and file.type_id=file_type.id", "type_id");
-        //ArrayList <String> file_description= database.get_result_more("select description from file where dataset_id="+ dataset_id,"description");
         ArrayList<String> file_location = database.get_result_more("select location from file where dataset_id=" + dataset_id, "location");
 
 
@@ -739,8 +716,6 @@ public class Excel2Database {
             boolean flag = true;
             for (int j = 0; j < file_location.size(); j++) {
                 String temp = file_location.get(j);
-                //System.out.println("In database file_location: "+ temp);
-                //System.out.println("In excel file_location: "+ content1);
                 if (content1.equals(temp)) {
                     flag = false;
                     break;
@@ -752,79 +727,7 @@ public class Excel2Database {
                 excel2DBLog.writeLine("You need new XML file : the sum of file size has changed");
 
             }
-		/*	else
-			{
-
-				String content2= table.getValue("file_type", i);
-				boolean flag1= true;
-				for(int k = 0; k< file_type.size(); k++)
-				{
-					String temp1= file_type.get(k);
-					//System.out.println("In database file_type: "+ temp1);
-					//System.out.println("In excel file_type: "+ content2);
-					if(content2.equals(temp1))
-						{
-							flag1=false;
-							break;
-						}
-				}
-				if(flag1)
-					excel2DBLog.writeLine("The file type has changed to:  "+ content2 +
-							" in file location "+ content1);
-
-				String content3= table.getValue("description", i);
-				boolean flag2= true;
-				for(int k = 0; k< file_description.size(); k++)
-				{
-					String temp2= file_description.get(k);
-					//System.out.println("In database file_description: "+ temp2);
-					//System.out.println("In excel file_description: "+ content3);
-					if(content3==null)
-						{
-							flag2=false;
-							break;
-						}
-					else if(temp2==null)
-							continue;
-					else if (temp2.equals(content3))
-					{
-							flag2=false;
-							break;
-					}
-
-				}
-				if(flag2)
-					excel2DBLog.writeLine("The file_description has changed to:  "+ content3 +
-							" in file location "+ content1);
-
-
-				String content4= table.getValue("sample_id", i);
-				boolean flag3= true;
-				String temp3 = database.get_file_sample_id(identifier, content1);
-				System.out.println("In database file_sample_id: "+ temp3);
-				System.out.println("In excel file_sample_id: "+ content4);
-				if(content4==null && temp3==null)
-					{
-					flag3=false;
-					continue;
-					}
-				else if(temp3==null)
-					{
-					flag3=false;
-					excel2DBLog.writeLine("The file_sample_id has changed to:  "+ content4 +
-							" in file location "+ content1);
-					continue;
-					}
-				else if(temp3.equals(content4))
-					flag3=false;
-				if(flag3)
-					excel2DBLog.writeLine("The file_sample_id has changed to:  "+ content4 +
-							" in file location "+ content1);
-
-			}*/
-
         }
-
     }
 
     public void fillTable_file_format() throws IOException, SQLException {
@@ -843,7 +746,6 @@ public class Excel2Database {
                 System.out.print("empt row y: " + row);
                 break;
             }
-            //System.out.println("1212"+filesSheet.getRow(row).getCell(0)+"12");
             ArrayList<String> record = new ArrayList<String>();
             initRecord(record, table.attributeList.size());
             Cell cell = HelpFunctions.getCell(filesSheet, row, 0);
@@ -898,7 +800,6 @@ public class Excel2Database {
                 System.out.print("empt row y: " + row);
                 break;
             }
-            //	System.out.println("1212"+filesSheet.getRow(row).getCell(0)+"12");
             ArrayList<String> record = new ArrayList<String>();
             initRecord(record, table.attributeList.size());
             Cell cell = HelpFunctions.getCell(filesSheet, row, 1);
@@ -980,16 +881,11 @@ public class Excel2Database {
                 System.out.println("empt row y: " + row);
                 break;
             }
-            //System.out.println("1212"+filesSheet.getRow(row).getCell(0)+"12");
             // we need to set the size of record, it's the same with
 
             ArrayList<String> record = new ArrayList<String>();
-            // init record
-            //initRecord(record, table.attributeList.size());
-            //String location_pk=null;
             Cell cell = HelpFunctions.getCell(filesSheet, row, 3);
             Cell cell1 = HelpFunctions.getCell(filesSheet, row, 0);
-            //String attribute = table.attributeList.get(indexList.get(col));
             String content = null;
             if (cell.getCellType() == 0) {
                 content = HelpFunctions.trim(Double.toString(cell.getNumericCellValue()));
@@ -1024,66 +920,16 @@ public class Excel2Database {
     public void fillTable_file() throws IOException, SQLException {
         setInsertOrder("file");
         Table table = schema.getTable("file");
-        //Table table3 = schema.getTable("curation_log");
         ArrayList<Integer> indexList = new ArrayList<Integer>();
 
         setInsertOrder("file_attributes");
-        //setInsertOrder("curation_log");
         Table table1 = schema.getTable("file_attributes");
 
-
-        // find the position of each cell in the attributeList
-        //	Row topRow=filesSheet.getRow(1);
-
-        //	int colNum=topRow.getLastCellNum();
-
-	/*	for (int col = 0; col < colNum; col++) {
-			Cell cell = HelpFunctions.getCell(filesSheet,1, col);
-			// the release-data is data-stamp
-			String attribute;
-			if(cell.getCellType()==0)
-			{
-				attribute = HelpFunctions.trim(Double.toString(cell.getNumericCellValue()));
-			}
-			else
-			attribute = HelpFunctions.trim(cell.getStringCellValue());
-			if (attribute.equals("release_date"))
-				attribute = "date_stamp";
-			if (attribute.equals("file_path"))
-				attribute = "file_location";
-			if (attribute.length() == 0)
-				break;
-			int index = table.getIndex(attribute);
-			indexList.add(index);
-		} */
         // read records
         // getLastRowNum() start from 0 ?
         System.out.println("colNum: " + filesSheet.getLastRowNum());
         int file_id = database.getid("file");
         int file_attribute_id = database.getid("file_attributes");
-		/*
-		for (Row row1 : samplesSheet) {
-			if(row1.getRowNum() == 1)
-        	{
-        	for (Cell cell : row1) {
-        		int columnIndex = cell.getColumnIndex();
-
-        		if(columnIndex>4)
-        		{
-        			String value = cell.getStringCellValue();
-        			//System.out.println("one"+ value);
-        			int att_id= database.getattribute_id(value.trim());
-        			if(att_id==0)
-        			{
-        			att_id=database.add_attribute(value.trim());
-        			System.out.println("！！！！！！！！！！！！！！！new add: "+ value+ " "+att_id);
-        			}
-        			attributes_id.add(att_id);
-        		}
-        	}
-        	}
-		}
-		*/
 
 
         for (int row = 2; row < filesSheet.getLastRowNum() + 1; row++) {
@@ -1096,7 +942,6 @@ public class Excel2Database {
                 System.out.println("empt row y: " + row);
                 break;
             }
-            //System.out.println("1212"+filesSheet.getRow(row).getCell(0)+"12");
             // we need to set the size of record, it's the same with
 
             ArrayList<String> record = new ArrayList<String>();
@@ -1107,7 +952,7 @@ public class Excel2Database {
 
             for (int col = 0; col < 6; col++) {
                 Cell cell = HelpFunctions.getCell(filesSheet, row, col);
-                //String attribute = table.attributeList.get(indexList.get(col));
+
                 System.out.println(col);
                 String content = null;
                 if (cell == null) {
@@ -1124,14 +969,7 @@ public class Excel2Database {
                     int value = (Integer) map_file_type.get(content);
                     System.out.println(content);
                     record.set(table.getIndex("type_id"), String.valueOf(value));
-					/*
-					String content_compare=database.get_result("select file_type.name from file_type, file where file.type_id=file_type.id and file.location="+ "'"+location_pk+"'", "name");
-					boolean flag_compare= true;
-					if(content_compare.equals(content))
-						flag_compare=false;
-					if(flag_compare)
-						excel2DBLog.writeLine("The file type has changed to:  "+ content +
-								" in file location "+ location_pk+". The old one is "+content_compare);*/
+
                 }
                 //sample_id
                 if (col == 3) {
@@ -1163,20 +1001,9 @@ public class Excel2Database {
                     if (content.startsWith("/") && ftp_site.endsWith("/"))
                         content = content.substring(1);
                     content = ftp_site + content;
-                    //  System.out.println("Location in file: " + content);
                     record.set(table.getIndex("location"), content);
                     location_pk = content;
-					    /*
-					    String flag= database.checkcontain1("file", "location", content, "id");
-					    System.out.println(flag);
-						if(flag != null)
-						{
-							record.set(table.getIndex("id"), flag);
-							file_id=Integer.valueOf(flag);
 
-						}
-						else
-						{	*/
                     record.set(table.getIndex("id"), String.valueOf(file_id));
                     //}
                     // remove the duplicate/
@@ -1187,21 +1014,14 @@ public class Excel2Database {
                         record.set(table.getIndex("description"), content);
                     else
                         record.set(table.getIndex("description"), "");
-				/*
-					String content_compare=database.get_result("select description from file where file.location="+ "'"+location_pk+"'", "description");
-					boolean flag_compare= true;
-					if(content_compare.equals(content))
-						flag_compare=false;
-					if(flag_compare)
-						excel2DBLog.writeLine("The description has changed to:  "+ content +
-								" in file location "+ location_pk+". The old one is "+content_compare);*/
+
                     System.out.println(content);
                 }
 
                 if (col > 3) {
                     if (content != null) {
                         ArrayList<String> record1 = new ArrayList<String>();
-                        //ArrayList<Integer> attributes_id = new ArrayList<Integer>();
+
                         initRecord(record1, table1.attributeList.size());
                         String temp1[] = content.split(":");
                         if (temp1.length < 2) {
@@ -1214,21 +1034,6 @@ public class Excel2Database {
                             System.out.println("！！！！！！！！！！！！！！！new add: " + temp1[0] + " " + att_id);
 
                             curationlog.add("File_attribute;;" + temp1[0] + ";;" + att_id);
-				  		/*
-				  		String log_date= new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-				  		String message = "Notice: New File_Attribute add: Name:"+ temp1[0]+" ID: "+att_id;
-				  		ArrayList<String> record_t = new ArrayList<String>();
-						initRecord(record_t, table3.attributeList.size());
-						record_t.set(table3.getIndex("id"),String.valueOf(log_id));
-						record_t.set(table3.getIndex("dataset_id"), String.valueOf(dataset_id));
-						record_t.set(table3.getIndex("creation_date"),log_date);
-						record_t.set(table3.getIndex("created_by"),"System");
-						record_t.set(table3.getIndex("action"),"Comment");
-						record_t.set(table3.getIndex("comments"),message);
-						table3.recordList.add(record_t);
-						log_id++;
-						*/
-                            //database.add_curationlog(dataset_id,log_date,"System","Comment",message);
 
                         }
 
@@ -1265,7 +1070,6 @@ public class Excel2Database {
             String file_path = record.get(index_path);
             // get file name from file_path
             String file_name = getFile_name(file_path);
-            //System.out.println("file_Name: "+file_name);
             int index_name = table.getIndex("name");
             record.set(index_name, file_name);
             // get identifier
@@ -1291,7 +1095,6 @@ public class Excel2Database {
             int index_location = table.getIndex("location");
             String file_location = record.get(index_location);
             System.out.println("llllllllll" + file_location);
-            //long file_size = getFile_size(file_location); //origin one
             long file_size = 0; //temp use for vpn
             if (file_size < 1) {
                 excel2DBLog.writeLine("ValidationTest for file_size: " + file_name +
@@ -1412,80 +1215,6 @@ public class Excel2Database {
         }
     }
 
-
-    /*//old version
-	public void fillTable_external_link() throws IOException {
-		setInsertOrder("external_link");
-		Table table = schema.getTable("external_link");
-		// // add database
-		// ArrayList<Integer> indexList = new ArrayList<Integer>();
-		// // find the position of each cell in the attributeList
-		// for (int col = 1; col < 3; col++) {
-		// Cell cell = linkSheet.getCell(col, 1);
-		// // the release-data is data-stamp
-		// String attribute = cell.getContents().trim();
-		// if (attribute.equalsIgnoreCase("prefix"))
-		// attribute = "link_type";
-		// if (attribute.equalsIgnoreCase("url"))
-		// attribute = "link_url";
-		// int index = table.getIndex(attribute);
-		// indexList.add(index);
-		// }
-		// // read records
-		// for (int row = 2; row < linkSheet.getRows(); row++) {
-		// if (!next(linkSheet, row))
-		// break;
-		// // we need to set the size of record, it's the same with
-		// ArrayList<String> record = new ArrayList<String>();
-		// // init record
-		// initRecord(record, table.attributeList.size());
-		// for (int col = 1; col < 3; col++) {
-		// Cell cell = linkSheet.getCell(col, row);
-		// String content = cell.getContents().trim();
-		// try {
-		// record.set(indexList.get(col - 1), content);
-		// } catch (Exception e) {
-		// // TODO: handle exception
-		// e.printStackTrace();
-		// }
-		// }
-		// // add record to table
-		// table.recordList.add(record);
-		// }// for
-		// add additional_information
-		String type = "additional_information";
-		String content = getContent(studySheet, type);
-		if (content.length() != 0) {
-			String[] urlArray = content.split(",");
-			for (int i = 0; i < urlArray.length; i++) {
-				// we need to set the size of record, it's the same with
-				ArrayList<String> record = new ArrayList<String>();
-				// init record
-				initRecord(record, table.attributeList.size());
-				record.set(table.getIndex("link_type"), type);
-				record.set(table.getIndex("link_url"), HelpFunctions
-						.trim(urlArray[i]));
-				table.recordList.add(record);
-			}
-		}
-		// add genome_browser
-		type = "genome_browser";
-		content = getContent(studySheet, type);
-		if (content.length() != 0) {
-			String[] urlArray = content.split(",");
-			for (int i = 0; i < urlArray.length; i++) {
-				// we need to set the size of record, it's the same with
-				ArrayList<String> record = new ArrayList<String>();
-				// init record
-				initRecord(record, table.attributeList.size());
-				record.set(table.getIndex("link_type"), type);
-				record.set(table.getIndex("link_url"), HelpFunctions
-						.trim(urlArray[i]));
-				table.recordList.add(record);
-			}
-		}
-	}
-*/
     public void fillTable_curationlog() throws SQLException {
 
         setInsertOrder("curation_log");
@@ -1519,12 +1248,9 @@ public class Excel2Database {
         setInsertOrder("sample");
         setInsertOrder("dataset_sample");
         setInsertOrder("sample_attribute");
-        //setInsertOrder("curation_log");
         Table table = schema.getTable("sample");
         Table table1 = schema.getTable("dataset_sample");
         Table table2 = schema.getTable("sample_attribute");
-        //Table table3 = schema.getTable("curation_log");
-        //log_id= database.getid("curation_log");
         ArrayList<Integer> indexList = new ArrayList<Integer>();
         int index1 = table.getIndex("id");
         indexList.add(index1);
@@ -1563,22 +1289,6 @@ public class Excel2Database {
                                 System.out.println("！！！！！！！！！！！！！！！new add: " + value + " " + att_id);
                                 String message = "Sample_attribute;;" + value.trim() + ";;" + att_id;
                                 curationlog.add(message);
-  		/*
-  		String log_date= new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-  		String message = "Notice: New Sample_Attribute add: Name:"+ value.trim()+" ID: "+att_id;
-
-  		ArrayList<String> record_t = new ArrayList<String>();
-		initRecord(record_t, table3.attributeList.size());
-		record_t.set(table3.getIndex("id"),String.valueOf(log_id));
-		record_t.set(table3.getIndex("dataset_id"), String.valueOf(dataset_id));
-		record_t.set(table3.getIndex("creation_date"),log_date);
-		record_t.set(table3.getIndex("created_by"),"System");
-		record_t.set(table3.getIndex("action"),"Comment");
-		record_t.set(table3.getIndex("comments"),message);
-		table3.recordList.add(record_t);
-		log_id++;
-		*/
-                                //database.add_curationlog(dataset_id,log_date,"System","Comment",message);
 
                             }
                             attributes_id.add(att_id);
@@ -1658,7 +1368,6 @@ public class Excel2Database {
                             }
 
                             System.out.println(species_id);
-                            //db.addsamplev3(datasetid,sample_id,species_id);
                             ArrayList<String> record = new ArrayList<String>();
                             initRecord(record, table.attributeList.size());
                             record.set(table.getIndex("species_id"), String.valueOf(species_id));
@@ -1679,15 +1388,9 @@ public class Excel2Database {
 
                         }
                         if (columnIndex == 2) {
-
                             name = cell.getStringCellValue();
-
-
                             System.out.println(name);
-                            // attributes+="Common Name=\""+attribute1+"\", ";
-
                         }
-
 
                         if (columnIndex > 2) {
 
@@ -1705,18 +1408,12 @@ public class Excel2Database {
                                 System.out.println(value);
                             }
 
-                            if (value.contains("::")) {  /* furture update
-
-      		  System.out.println(attributes_id.get(columnIndex-3)+" contain unit "+value);
-      		  String[] valueunit = value.split("::");
-      		  String unitid = db.getunit_id(valueunit[1]);
-      		  db.addsample_attribute(id, attributes_id.get(columnIndex-3), valueunit[0], unitid);
-      		  */
+                            if (value.contains("::")) {
 
                             } else if (value == "" || value.isEmpty() || value == null) {
                                 continue;
                             } else {
-                                //db.addsample_attribute_without_unit(id, attributes_id.get(columnIndex-3), value);
+
                                 ArrayList<String> record2 = new ArrayList<String>();
                                 initRecord(record2, table2.attributeList.size());
                                 record2.set(table2.getIndex("attribute_id"), String.valueOf(attributes_id.get(columnIndex - 3)));
@@ -1737,171 +1434,10 @@ public class Excel2Database {
                     temp_sampleid++;
                     temp_datasetsampleid++;
                 }
-
-
-                //db.updatesampleattribute(sample_id, attribute,doi);
-
             }
         }//new add if
 
-
         //end new part
-
-	 	/*
-	 	for (int col = 0; col < 5; col++) {//change
-			Cell cell = HelpFunctions.getCell(samplesSheet, 1, col);
-
-			// the release-data is data-stamp
-			String attribute = HelpFunctions.trim(cell.getStringCellValue());
-			if (attribute.equals("species"))
-				attribute = "species_id";
-			if (attribute.length() == 0)
-				break;
-			if(attribute.equals("species_id")|| attribute.equals("sample_id")||attribute.equals("attribute_key")||attribute.equals("attribute_value")||attribute.equals("attribute_unit"))//add this if
-			{
-				if(attribute.equals("sample_id"))
-					attribute="name";
-				int index = table.getIndex(attribute);
-			indexList.add(index);
-			}
-		}
-
-	 	System.out.println("Row Number" + samplesSheet.getLastRowNum());
-	 	int temp= database.getid("sample");
-		for (int row = 2; row < samplesSheet.getLastRowNum()+1; row++) {
-			//
-			if (!next(samplesSheet, row))
-			{
-				System.out.print("empt row sample: "+row);
-				break;
-			}
-
-			ArrayList<String> record = new ArrayList<String>();
-			initRecord(record, table.attributeList.size());
-			Cell cell = HelpFunctions.getCell(samplesSheet, row, 0);
-			String sample_id=null;
-
-			if(cell.getCellType()==0)
-			{
-				//sample_id = HelpFunctions.trim(Double.toString((int) cell.getNumericCellValue()));
-					sample_id= String.valueOf((int) cell.getNumericCellValue());
-			}
-			else
-				sample_id = HelpFunctions.trim(cell.getStringCellValue());
-
-
-			//to avoid null row
-			if(sample_id.equals(""))
-				continue;
-		//	Cell cell2 = HelpFunctions.getCell(samplesSheet, row, 1);
-		//	String tax_id = HelpFunctions.trim(HelpFunctions.getCellString(cell2));
-
-			//avoid duplicate record in database
-			//String flag= database.checkcontain1("sample", "code", sample_id, "id");
-			//if(flag != null)
-			//{
-			//	map_sample.put(sample_id, Integer.parseInt(flag));
-				//record.set(table.getIndex("id"),flag);
-				//record.set(table.getIndex("code"),sample_id);
-
-			//}
-			//else
-			//{
-
-			//}
-
-			Cell cell_get = HelpFunctions.getCell(samplesSheet, row, 1);
-			String species = HelpFunctions.trim(HelpFunctions.getCellString(cell_get));
-			System.out.println("species: "+ species );
-			int value = map_species.get(species);
-			record.set(table.getIndex("species_id"), String.valueOf(value));
-
-			Cell cell_key = HelpFunctions.getCell(samplesSheet, row, 3);
-			String attribute_key = HelpFunctions.trim(HelpFunctions.getCellString(cell_key));
-
-			Cell cell_value = HelpFunctions.getCell(samplesSheet, row, 4);
-			String attribute_value = HelpFunctions.trim(HelpFunctions.getCellString(cell_value));
-
-			String attribute_unit="";
-			Cell cell_unit = HelpFunctions.getCell(samplesSheet, row, 5);
-			if(cell_unit != null){
-				attribute_unit = HelpFunctions.trim(HelpFunctions.getCellString(cell_unit));
-			}
-
-			String total= attribute_key+",,"+attribute_value+",,"+attribute_unit;
-
-			Boolean flag= true;
-
-			for(String key: map_sample_attribute.keySet())
-			{
-				if(key.equals(sample_id))
-				{
-					String result = map_sample_attribute.get(key)+";;"+total;
-					map_sample_attribute.put(key, result);
-					flag = false;
-				}
-
-
-			}
-			if(flag)
-			{
-				map_sample_attribute.put(sample_id, total);
-			}
-
-			Boolean flag1=true;
-
-			for(String key:map_sample.keySet())
-			{
-			 if(key.equals(sample_id))
-			 {
-				 flag1=false;
-			 }
-			}
-
-			if(flag1)
-			{
-			//find repeat sample in database
-			if(attribute_key.toLowerCase().startsWith("Already In GigaDB as part of".toLowerCase()))//update to lowercase no test
-			{
-
-			String[] get_doi_value=attribute_key.toLowerCase().split("Already In GigaDB as part of".toLowerCase());//update to lowercase no test
-			String value_doi=get_doi_value[1].trim();
-			if(value_doi!=null)
-			{
-				String sql="select sample.id from sample,dataset,dataset_sample where sample.id=dataset_sample.sample_id and dataset_sample.dataset_id=dataset.id and dataset.identifier="+"'"+value_doi+"' and sample.name="+"'"+sample_id+"'";
-				int repeatsample_id= database.get_resultint(sql, "id");
-				map_sample.put(sample_id, repeatsample_id);
-
-
-			}else
-				continue;
-
-			}//end
-			else{
-			map_sample.put(sample_id, temp);
-			record.set(table.getIndex("id"),String.valueOf(temp));
-			record.set(table.getIndex("name"),sample_id);
-			temp=temp+1;
-			System.out.println("sample_id:" + sample_id);
-			sampleid.add(sample_id);
-
-
-			// record.add(content);
-
-			table.recordList.add(record);
-			}
-			}
-		}
-		// find the position of each cell in the attributeList
-		for(String key:map_sample_attribute.keySet())
-		{
-			System.out.println(key + ":" + map_sample_attribute.get(key));
-		}
-		for(String key:map_sample.keySet())
-		{
-			System.out.println(key + ":" + map_sample.get(key));
-		}*/
-
     }
 
     //test if a row is a blank one , just test the first cell of the row
@@ -2042,7 +1578,6 @@ public class Excel2Database {
         setInsertOrder("image");
         Table table = schema.getTable("image");
         int size = table.attributeList.size();
-//		System.out.println("image size: "+size);
         ArrayList<String> record = new ArrayList<String>();
         String key = "_" + getIdentifier();
 
@@ -2050,12 +1585,7 @@ public class Excel2Database {
             // image_location from map
             String attribute = table.attributeList.get(i);
             if (attribute.equals("id")) {
-                //String value= getContent(studySheet, "image_location");
-                //String flag= database.checkcontain1("image", "location", value, "id");
-                //if(flag==null)
                 image_id = database.getid("image");
-                //else
-                //image_id= Integer.parseInt(flag);
                 System.out.println("id number " + image_id);
 
 
@@ -2082,9 +1612,6 @@ public class Excel2Database {
             String content = getContent(studySheet, attribute);
             // we can't find the attribute.
             if (cell == null) {
-                // if there is not url, then there should not be a image
-                // if(table.attributeList.get(i).equals("image_url"))
-                // return;
                 if (attribute.equals("id")) {
                     content = String.valueOf(image_id);
                     record.add(content);
@@ -2180,13 +1707,6 @@ public class Excel2Database {
                 record.set(index_url, details.get("project_url"));
                 projectid.add(String.valueOf(temp));
                 temp = temp + 1;
-		/*
-			for (int j = 0; j < table.attributeList.size(); j++) {
-				String attribute = table.attributeList.get(j);
-				String value = details.get(attribute);
-				// System.out.println("project: " + value);
-				record.add(value);
-			}*/
                 table.recordList.add(record);
             } else
                 projectid.add(flag);
@@ -2370,41 +1890,6 @@ public class Excel2Database {
             table.recordList.add(record);
         } else
             publisher_id = Integer.valueOf(flag);
-
-	/*
-
-		for (int i = 0; i < size; i++) {
-			String attribute=table.attributeList.get(i);
-			if(attribute.equals("id"))
-			{
-				publisher_id= database.getid("publisher");
-			}
-			if(attribute.equals("name"))
-			{
-				attribute="publisher";
-			}
-
-			Cell cell = HelpFunctions.findCell(studySheet, attribute);
-			String content = getContent(studySheet, attribute);
-			if (cell == null) {
-				if(attribute.equals("id"))
-				{
-					content= String.valueOf(publisher_id);
-					record.add(content);
-					continue;
-				}
-				else
-				{
-				record.add(null);
-				continue;
-				}
-			}
-			if(attribute.equals("publisher"))
-				publisher=content;
-
-			record.add(content);
-		}
-		table.recordList.add(record);*/
     }
 
 
@@ -2534,35 +2019,7 @@ public class Excel2Database {
                     content = content + "/";
                 }
             }
-		/*
-			if(attribute.equals("publication_date"))
-			{
-				String temp1=database.provideDatastamp(getIdentifier());
-				System.out.println("file date   " + temp1);
-				System.out.println("dataset publication_date" + content);
-				String[]ss11= temp1.split("\\-");
-				String[]ss22= content.split("\\/");
-				boolean big1=true;
-				for(int t=0;t<ss11.length;t++)
-				{
-				System.out.println("p1: "+ ss11[t]);
-				System.out.println("p2: "+ ss22[t]);
 
-					if(Integer.parseInt(ss11[t])>Integer.parseInt(ss22[t]))
-					{
-						big1=false;
-					}
-				}
-
-				if(big1==false)
-				{
-					content=ss11[0]+"/"+ss11[1]+"/"+ss11[2];
-				}
-
-				System.out.println("publication_date content:" + content);
-				//record.add(content);
-
-			}*/
             if (attribute.equals("upload_status")) {
                 if (content.equalsIgnoreCase("Published")) {
                     if (database.checkemail(email_identifier))
@@ -2592,8 +2049,7 @@ public class Excel2Database {
                 if (m.find()) {
                     String num_letter = m.group(1);
                     String union = m.group(2);
-                    // System.out.println(num_letter);
-                    // System.out.println(union);
+
                     if (KB.equalsIgnoreCase(union)) {
                         dataset_size = Double.parseDouble(num_letter);
                         dataset_size *= (1024);
@@ -2632,22 +2088,11 @@ public class Excel2Database {
                     System.out.println("dataset_size: " + dataset_size);
                 }
 
-                //double dataset_size=Double.parseDouble(content);
-                //System.out.println(dataset_size);
-                //dataset_size*=(1024*1024*1024);
                 dataset_size = (long) dataset_size;
                 long long_size = new Double(dataset_size).longValue();
-//				System.out.println(long_size);
-                content = String.valueOf(long_size);
-//				System.out.println(content);
-            }
-//			if(attribute.equals("description")){
-//				System.out.println(content);
-//				for(int l=0;l<content.length();l++){
-//					System.out.println(content.charAt(l)+" : "+(int)(content.charAt(l)));
-//				}
-//			}
 
+                content = String.valueOf(long_size);
+            }
             record.add(content);
         }
 
@@ -2658,12 +2103,9 @@ public class Excel2Database {
         setInsertOrder("author");
         Table table = schema.getTable("author");
         int size = table.attributeList.size();
-        // ArrayList<String> record=new ArrayList<String>();
         // add author names
         String[] nameList = getContent(studySheet, "author_list").replace(" [", "[").replace("[ ", "[").replace(" ]", "]").replace("] ", "]").split(
                 ";| +and +");
-        //String identifier = schema.getTable("dataset")
-        //	.getValue("identifier", 0);
         int temp = database.getid("author");
         for (int i = 0; i < nameList.length; i++) {
 
@@ -2672,8 +2114,6 @@ public class Excel2Database {
             initRecord(record, size);
             String author_name = HelpFunctions.trim(nameList[i]);
 
-            // add auto correct function
-            //author_name = author_name.replaceAll(" +", " ");
 
             int start_index = author_name.indexOf(" ");
             String first_name = author_name.substring(0, start_index);
@@ -2737,7 +2177,6 @@ public class Excel2Database {
                 } else
                     record.set(index_orcid, orcid);
                 temp = temp + 1;
-                //	record.set(index_identifer, identifier);
                 table.recordList.add(record);
             } else
                 authorid.add(flag);
@@ -2864,29 +2303,7 @@ public class Excel2Database {
                 record.set(index_id, String.valueOf(temp));
                 temp++;
                 table.recordList.add(record);
-
-
             }
-
-
-
-
-	/*String flag= database.checkcontain("attribute", "attribute_name", , "id")
-	if(flag==null)
-	{
-		record.set(index_id, String.valueOf(temp));
-		temp=temp+1;
-	}
-	else
-		record.set(index_id, flag);
-
-	record.set(index_dataset_id, String.valueOf(dataset_id));
-	record.set(index_sample_id, sample_id);
-
-
-	System.out.println("sample_map: "+ sample_id);
-
-	table.recordList.add(record);*/
         }
     }
 
@@ -2901,9 +2318,6 @@ public class Excel2Database {
         if (relateddoi == null || relateddoi.equals(""))
             return;
         String doirelationship = getContent(studySheet, "doi_relationship");
-        //System.out.println("DOI-relationship: "+ doirelationship );
-        //String identifier = schema.getTable("dataset")
-        //	.getValue("identifier", 0);
         ArrayList<String> record = new ArrayList<String>();
         initRecord(record, size);
         relation_id = database.getid("relation");
@@ -3016,13 +2430,8 @@ public class Excel2Database {
                 type_id = type_id + 1;
                 table.recordList.add(record);
             } else
-
                 typeid.add(flag);
-
-
         }
-
-
     }
 
     public void fillTable_dataset_type() throws SQLException {
@@ -3287,66 +2696,8 @@ public class Excel2Database {
             record.add(null);
     }
 
-	/*
-	public static long getFile_size(String file_location) throws IOException {
-		// String
-		// ftp_site=(String)schema.getTable("dataset").getAttribute("ftp_site");
-
-		String ftp_site = "climb.genomics.cn";
-		// String path = ftp_site + file_location;
-		FTPClient ftpClient = new FTPClient();
-		long fileSize = -1;
-
-		try{
-		ftpClient.connect(ftp_site);
-
-		ftpClient.login("anonymous", "senhong1631");
-
-		ftpClient.enterLocalPassiveMode();
-
-		int beginIndex = 0;
-		if (file_location.indexOf(ftp_site) != -1)
-			beginIndex = file_location.indexOf(ftp_site) + ftp_site.length();
-		String location = file_location.substring(beginIndex);
-
-		FTPFile ftpFile = ftpClient.mlistFile(location);
-
-		if (ftpFile != null) {
-            String name = ftpFile.getName();
-            fileSize = ftpFile.getSize();
-            String timestamp = ftpFile.getTimestamp().getTime().toString();
-            String type = ftpFile.isDirectory() ? "Directory" : "File";
-
-            System.out.println("Name: " + name);
-            System.out.println("Size: " + fileSize);
-            System.out.println("Type: " + type);
-            System.out.println("Timestamp: " + timestamp);
-        } else {
-        	excel2DBLog.writeLine("We can't get the file, please check its path: ");
-	        excel2DBLog.writeLine(file_location);
-        }
-
-		ftpClient.logout();
-		ftpClient.disconnect();
-		} catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (ftpClient.isConnected()) {
-                try {
-                    ftpClient.disconnect();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        }
-
-		return fileSize;
-	}
-	*/
 
     public static long getFile_size(String file_location) throws IOException {
-        // String
-        // ftp_site=(String)schema.getTable("dataset").getAttribute("ftp_site");
 
         String ftp_site = "parrot.genomics.cn";//ftp
         //String ftp_site = "192.168.174.43";//vpn
@@ -3354,27 +2705,21 @@ public class Excel2Database {
         FTPClient ftpClient = new FTPClient();
         ftpClient.connect(ftp_site);
         long fileSize = -1;
-        // ftpClient.login("senhong", "senhong1631");
-        ftpClient.login("anonymous", "senhong1631");
-        // ftpClient.binary();;
+        ftpClient.login("", "");
         int beginIndex = 0;
         if (file_location.indexOf(ftp_site) != -1)
             beginIndex = file_location.indexOf(ftp_site) + ftp_site.length();
         String location = file_location.substring(beginIndex);
         String request = "SIZE " + location + "\r\n";
-        //ftpClient.sendServer(request);
         ftpClient.sendCommand(request);
         try {
-            //String temp = ftpClient.getResponseString();
             String temp = ftpClient.getReplyString();
-            //int status = ftpClient.readServerResponse();
             int status = ftpClient.getReplyCode();
             if (status == 213) {
                 String msg = ftpClient.getReplyString();
                 fileSize = Long.parseLong(msg.substring(3).trim());
             } else {
-                excel2DBLog
-                        .writeLine("We can't get the file, please check its path: ");
+                excel2DBLog.writeLine("We can't get the file, please check its path: ");
                 excel2DBLog.writeLine(file_location);
             }
 
@@ -3432,15 +2777,6 @@ public class Excel2Database {
             //fillTable_dataset_("project");
             //comparison();
         } catch (Exception e) {
-            // TODO: handle exception
-            // TODO: handle exception
-//			Excel2Database.excel2DBLog.writeLine(file.getName());
-            // excel2DBLog.writeLine("!!!!!!!!!!!!!!!!");
-            // excel2DBLog.writeLine("!!!!!!!!!!!!!!!!");
-            // e
-//			Excel2Database.excel2DBLog.writeLine(e.toString());
-//			PrintStream ps = new PrintStream(fos);
-//			PrintStream printStream=new PrintStream(out, autoFlush, encoding)
             e.printStackTrace();
             e.printStackTrace(Excel2Database.excel2DBLog.printWriter);
             Excel2Database.excel2DBLog.printWriter.flush();
@@ -3453,8 +2789,6 @@ public class Excel2Database {
     public ArrayList<String> createupdateStmt() throws IOException,
             SQLException {
 
-//		return schema.createUpdateStmt_version2();
-//		return schema.createUpdateStmt();
         return schema.naive_createUpdateStmt();
 
     }

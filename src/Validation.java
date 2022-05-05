@@ -70,7 +70,6 @@ public class Validation {
     Validation() throws Exception {
         cvMap = new HashMap<String, ArrayList<String>>();
         myHttpClient = new MyHttpClient();
-        // isValid = true;
         // ignore the cookie
         DefaultHttpParams.getDefaultParams().setParameter(
                 "http.protocol.cookie-policy", CookiePolicy.IGNORE_COOKIES);
@@ -87,7 +86,6 @@ public class Validation {
         // validation.xml
         Document document = HelpFunctions.getDocument(validationPath);
         Element element = document.getDocumentElement();
-        // System.out.println("������������:" + element.getTagName());
         NodeList childList = element.getChildNodes();
         for (int i = 0; i < childList.getLength(); i++) {
             Node node = childList.item(i);
@@ -112,22 +110,11 @@ public class Validation {
         String prefix = "";
         // dataset identifer
         table = schema.getTable("dataset");
-		/*target = "identifier";
-		String identifier = table.getValue(target, 0);
-		String regex = cvMap.get(target).get(0);
-		result &= regexTest(regex, identifier, target, log);*/
         // dataset publisher
         target = "publisher";
         table1 = schema.getTable("publisher");
         String publisher = table1.getValue("name", 0);
         result &= validTest(target, publisher, log);
-        // dataset upload_status
-	/*	target = "upload_status";
-		String upload_status = table.getValue(target, 0);
-		String publication_date = table.getValue("publication_date", 0);
-		System.out.println("validation upload status:  "+ upload_status);
-		System.out.println("publication_date:  "+ publication_date);
-		result &= validTestforstatus(target,upload_status,publication_date,log);*/
         // dataset dataset_type
         target = "name";
         table = schema.getTable("type");
@@ -140,14 +127,6 @@ public class Validation {
         log = "prefix error";
         target = "link";
         table = schema.getTable("link");
-        // just test the prefix
-        //result &= validTest(table, target, log);
-        //result &= ext_acc_Test(table, target, "");
-        // dataset ext_acc_link
-        //target = "ext_acc_link";
-        //table = schema.getTable("datasetext_acc_link");
-        //result &= validTest(table, target, log);
-        //result &= ext_acc_Test(table, target, "");
         log = "";
         // submitter_email
         target = "email";
@@ -170,7 +149,6 @@ public class Validation {
         table = schema.getTable("project");
         regex = urlRegex;
         prefix = "";
-        // regexTest(table, target, regex, log);
         result &= accessTest(table, target, prefix, log);
         // determine if the url is in the database or not
         result &= uniqueProjectNameTest(table);
@@ -194,72 +172,12 @@ public class Validation {
         table = schema.getTable("sample");
         target = "sample_attributes";
         log = "";
-        //result &= sample_attributesTest(table, target, log);
-
-        // link_url
-		/*
-		target = "link_url";
-		table = schema.getTable("external_link");
-		result &= accessTest(table, target, "", log);
-		System.out.println("link_url test OK");
-		*/
-        // file type we don't need to test it
-        // target="file_type";
-        // table=schema.getTable("file");
-        // log= "in file ";
-        // validTest(table, target,log,"file_name");
         // file_description
         target = "file_type";
         table = schema.getTable("file");
         result &= validTest(table, target, log, "file_name");
         System.out.println("file_type test OK");
-        // manuscript table test can't access NCBI
-        //table = schema.getTable("manuscript");
-        //result &= manuscriptTest(table, log);
-        // log = "";
-        // table = schema.getTable("manuscript");
-        // target = "manuscript_doi";
-        // prefix = myHttpClient.prefixMap.get(target);
-        // result &=accessTest(table, target, prefix, log);
-        // // PMID
-        // target = "pmid";
-        // regex = cvMap.get(target).get(0);
-        // prefix = myHttpClient.prefixMap.get(target);
-        // result &=regexTest(table, target, regex, log);
-        // result &= accessTest(table, target, prefix, log);
 
-
-        // external_link url
-		/*
-		target = "link_url";
-		table = schema.getTable("external_link");
-		prefix = "";
-		result &= accessTest(table, target, prefix, log);
-		// image iamge_location to be done???
-		// image image_url
-		target = "image_url";
-		table = schema.getTable("image");
-		prefix = "";
-		*/
-        //determine if image_url is a web url or position no need  determine
-
-        //result &= accessTest(table, target, prefix, log);
-        // ftp_site to be done yet
-	/*	target = "ftp_site";
-		table = schema.getTable("dataset");
-		String url = table.getValue(target, 0);
-		String ftp_site = "climb.genomics.cn";
-		result &= ftpTest(ftp_site, url, target, log);*/
-        // accessTest(table, target,"", log);
-        // tax_id && common_name
-		/* ncbi can't access
-		table = schema.getTable("species");
-		target = "tax_id";
-		regex = "\\d+";
-		result &= regexTest(table, target, regex, log);
-		prefix = myHttpClient.prefixMap.get(target);
-		result &= speciesTest(table, target, prefix, log);
-		*/
         // file
 
         table = schema.getTable("file_type");
@@ -799,10 +717,6 @@ public class Validation {
 
 
     void printPage(String urls) throws HttpException, IOException, SAXException {
-        // WebRequest req = new GetMethodWebRequest(url );
-        // WebResponse resp = webConversation.getResponse( req );
-        // String page=resp.getDOM().getTextContent();
-        // System.out.println(page);
 
         UserAgentContext uacontext = new SimpleUserAgentContext();
 
@@ -815,8 +729,6 @@ public class Validation {
         try {
 
             Reader reader = new InputStreamReader(in, "utf-8");
-            // int length=reader.read(buffer);
-            // System.out.println(new String(buffer));
             InputSourceImpl inputSource = new InputSourceImpl(reader, urls);
 
             Document d = builder.parse(inputSource);
@@ -908,26 +820,6 @@ public class Validation {
 
     public static void main(String[] args) throws Exception {
         Validation validation = new Validation();
-        // target="ftp_site";
-        // table=schema.getTable("dataset");
-        // accessTest(table, target,"", log);
-        // validation.accessTest(" http://cucumber.genomics.org.cn","","");
-        // System.out.println(validation.ftpTest("climb.genomics.cn",
-        // "ftp://climb.geno mics.cn/pub/10.5524/",""));
-        // System.out.println(validation.urlRegex);
-        // System.out.println(validation.regexTest(validation.urlRegex,
-        // "http://www.baidu.com/", ""));
-        // ������������������
-        // temp=temp.replace((char)12288,' ');
-        // //������ non-break space
-        // temp=temp.replace("\u00A0"," ");
-        // validation.myTest();
-        // validation.printPage("http://www.ebi.ac.uk/ena/data/view/");
-        // System.out
-        // .println(validation
-        // .getCommon_name("http://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=9557"));
-        // System.out.println((int)
-        // "?http://cucumber.genomics.org.cn".charAt(0));
     }
 
 }

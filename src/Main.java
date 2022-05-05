@@ -46,15 +46,6 @@ public class Main {
         excel.database.execute(begin);
         int operation = 0;
         try {
-		/*	if (excel.isReserved()) {
-				System.out.println("End error: " + xlsfile.getName());
-				Excel2Database.excel2DBLog.writeLine("**End error: "
-						+ xlsfile.getName()
-						+ " is reserved! You are't allowed to upload it!");
-				Excel2Database.excel2DBLog.writeLine();
-				failFile.add(xlsfile.getName());
-				return 0;
-			}*/
             operation = integrityCheck.duplicate(xlsfile);
             System.out.println("operation: " + operation);
             if (operation == 1) {
@@ -82,8 +73,6 @@ public class Main {
             // fill primary Value list
             excel.schema.fillPrimaryValueList();
             ArrayList<String> sqlTemp = null;
-            // String identifier = excel.schema.getTable("dataset").getValue(
-            // "identifier", 0);
             if (operation == 3) {
                 System.out.println("ocode 3");
                 sqlTemp = excel.createupdateStmt();

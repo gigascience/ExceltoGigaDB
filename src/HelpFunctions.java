@@ -182,14 +182,6 @@ public class HelpFunctions {
         return map;
     }
 
-    //	// get document of String
-//	public static Document getDocument(String content) throws ParserConfigurationException,
-//			SAXException, IOException {
-//		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-//		DocumentBuilder db = dbf.newDocumentBuilder();
-//		File xmlFile = new File(path);
-//		return db.parse(xmlFile);
-//	}
     public static Cell getCell(Sheet sheet, int row, int col) {
         Row row2 = sheet.getRow(row);
         if (row2 == null)
