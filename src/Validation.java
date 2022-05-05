@@ -573,17 +573,16 @@ public class Validation {
     boolean ftpTest(String ftp_site, String url, String field, String log)
             throws IOException {
         boolean result = true;
-        // String path = ftp_site + file_location;
+
 
         ftpClient.connect(ftp_site);
-        ftpClient.login("anonymous", "1631");
-        // ftpClient.binary();;
+        ftpClient.login("", "");
+
         int beginIndex = 0;
         if (url.indexOf(ftp_site) != -1)
             beginIndex = url.indexOf(ftp_site) + ftp_site.length();
         String location = url.substring(beginIndex);
         try {
-            //ftpClient.cd(location);
             ftpClient.changeWorkingDirectory(location);
         } catch (Exception e) {
             // TODO: handle exception
@@ -595,13 +594,11 @@ public class Validation {
             result = false;
         }
         ftpClient.disconnect();
-        // isValid &= result;
         return result;
     }
 
     boolean uniqueProjectNameTest(Table table) throws SQLException, IOException {
         int size = table.recordList.size();
-        // String field="project_url";
         boolean result = true;
         for (int i = 0; i < size; i++) {
             String url = table.getValue("url", i);
