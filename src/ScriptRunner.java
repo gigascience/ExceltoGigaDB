@@ -72,7 +72,7 @@ public class ScriptRunner {
             } else {
                 logWriter = new PrintWriter(new FileWriter(logFile, false));
             }
-        } catch(IOException e){
+        } catch (IOException e) {
             System.err.println("Unable to access or create the db_create log");
         }
         try {
@@ -81,7 +81,7 @@ public class ScriptRunner {
             } else {
                 errorLogWriter = new PrintWriter(new FileWriter(errorLogFile, false));
             }
-        } catch(IOException e){
+        } catch (IOException e) {
             System.err.println("Unable to access or create the db_create error log");
         }
         String timeStamp = new SimpleDateFormat("dd/mm/yyyy HH:mm:ss").format(new java.util.Date());
@@ -156,10 +156,10 @@ public class ScriptRunner {
      * Runs an SQL script (read in using the Reader parameter) using the
      * connection passed in
      *
-     * @param conn - the connection to use for the script
+     * @param conn   - the connection to use for the script
      * @param reader - the source of the script
      * @throws SQLException if any SQL errors occur
-     * @throws IOException if there is an error reading from the Reader
+     * @throws IOException  if there is an error reading from the Reader
      */
     private void runScript(Connection conn, Reader reader) throws IOException,
             SQLException {
@@ -203,8 +203,7 @@ public class ScriptRunner {
             if (!autoCommit) {
                 conn.commit();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new IOException(String.format("Error executing '%s': %s", command, e.getMessage()), e);
         } finally {
             conn.rollback();
@@ -234,7 +233,7 @@ public class ScriptRunner {
     }
 
     private void execSqlCommand(Connection conn, StringBuffer command,
-                             LineNumberReader lineReader) throws SQLException {
+                                LineNumberReader lineReader) throws SQLException {
 
         Statement statement = conn.createStatement();
 
