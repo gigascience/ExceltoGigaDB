@@ -37,6 +37,8 @@ import org.apache.commons.net.*;
 import org.apache.commons.net.ftp.*;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellValue;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
@@ -68,6 +70,7 @@ public class Excel2Database {
 	Projects projects;
 	String path;
 	File file;
+	FormulaEvaluator evaluator;
 	boolean isValid;
 	String datasettype;
 	ArrayList<String> sampleid= new ArrayList<String>();
@@ -141,6 +144,7 @@ public class Excel2Database {
 			samplesSheet = workbook.getSheet("Samples");
 			studySheet = workbook.getSheet("Study");
 			linkSheet = workbook.getSheet("Links");
+			evaluator = workbook.getCreationHelper().createFormulaEvaluator();
 			schema = new Schema();
 			projects = new Projects();
 			database = new Database();
@@ -1738,9 +1742,9 @@ public class Excel2Database {
       	
       	  int columnIndex = cell.getColumnIndex(); 
       	  if(columnIndex == 0)
-               {
+          {
       		  if(cell.getCellType()==0)
-              	 {
+              {
       			  sample_id= String.valueOf(cell.getNumericCellValue());
               		 if(sample_id.endsWith(".0"))
               		 {
@@ -1749,29 +1753,55 @@ public class Excel2Database {
 		                	
 	                	 System.out.println(sample_id);
 	                	
-              	 }else{
+              }else{
               	 sample_id=  cell.getStringCellValue();
               	 System.out.println(sample_id);
-              	 }
-      		  	if(sample_id==null || sample_id=="")
-      		  	{
+              }
+      		  if(sample_id==null || sample_id=="")
+      		  {
       		  		break;
-      		  	}
-              	
-               }
-               if(columnIndex == 1)
-               {
-            	   if(cell.getCellType()==0)
-                	 {
+      		  }
+          }
+          if(columnIndex == 1)
+          {
+            	if(cell.getCellType()==0) // It's a numeric
+                {
               	 species_id= (int) cell.getNumericCellValue();
-                	 }
-            	   else
-            	   {
-            		   String temp_species_id = cell.getStringCellValue().trim();
-            		   temp_species_id=temp_species_id.replace(" ", "");
-            		   System.out.println(temp_species_id);
-            		   species_id = Integer.valueOf(temp_species_id); 
-            	   }
+                }
+               else if(cell.getCellType()==2) //It's a formula
+               {
+                  System.out.println("cell type: " + cell.getCellType());
+                  CellValue cellValue = evaluator.evaluate(cell);
+                  String temp_species_id = "";
+                  switch (cellValue.getCellType()) {
+                      case Cell.CELL_TYPE_BOOLEAN:
+                          break;
+                      case Cell.CELL_TYPE_NUMERIC:
+                          species_id = (int) cellValue.getNumberValue();
+                          break;
+                      case Cell.CELL_TYPE_STRING:
+                          temp_species_id = cellValue.getStringValue();
+                          temp_species_id=temp_species_id.replace(" ", "");
+                          species_id = Integer.valueOf(temp_species_id);
+                          break;
+                      case Cell.CELL_TYPE_BLANK:
+                          break;
+                      case Cell.CELL_TYPE_ERROR:
+                          break;
+                      case Cell.CELL_TYPE_FORMULA:
+                          break;
+                  }
+                  System.out.println(species_id);
+
+               }
+               else
+               {
+                   System.out.println("cell type: " + cell.getCellType());
+                   String temp_species_id = cell.getStringCellValue().trim();
+                   temp_species_id=temp_species_id.replace(" ", "");
+                   System.out.println(temp_species_id);
+                   species_id = Integer.valueOf(temp_species_id);
+               }
               	 
               	
               
@@ -2690,8 +2720,9 @@ public class Excel2Database {
 			
 			if(attribute.equals("excelfile"))
 			{
-				
-				content= file.getName();
+
+				String fileName = file.getName();
+				content= fileName.substring(0,fileName.length() > 50 ? 49 : fileName.length()-1);
 			}
 			
 			if(attribute.equals("excelfile_md5"))
@@ -2873,15 +2904,18 @@ public class Excel2Database {
 		int size = table.attributeList.size();
 		// ArrayList<String> record=new ArrayList<String>();
 		// add author names
-		String[] nameList = getContent(studySheet, "author_list").replace(" [", "[").split(
+		String[] nameList = getContent(studySheet, "author_list").replace(" [", "[").replace("[ ", "[").replace(" ]", "]").replace("] ", "]").split(
 				";| +and +");
 		//String identifier = schema.getTable("dataset")
 			//	.getValue("identifier", 0);
 		int temp= database.getid("author");
 		for (int i = 0; i < nameList.length; i++) {
+
+		    System.out.println("author info no " + (i+1) + "/" + nameList.length);
 			ArrayList<String> record = new ArrayList<String>();
 			initRecord(record, size);
 			String author_name = HelpFunctions.trim(nameList[i]);
+
 			// add auto correct function
 			//author_name = author_name.replaceAll(" +", " ");
 			
@@ -3174,7 +3208,7 @@ public void fillTable_sample_attribute() throws SQLException, IOException{
 		int dataset_funder_id= database.getid("dataset_funder");
 		for(int i=0;i<bb.length;++i)
 		{
-			
+		System.out.println("funding info no "+ (i+1) + "/" + bb.length);
 		
 		String[] aa= bb[i].split(",");
 		String fundername=aa[0].trim().toLowerCase().replace("'", "''");
