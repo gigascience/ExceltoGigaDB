@@ -4,7 +4,6 @@ import java.util.Collections;
 
 import javax.lang.model.element.Element;
 
-import sun.font.CreatedFontTracker;
 
 /**
  *
