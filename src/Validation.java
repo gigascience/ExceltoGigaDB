@@ -115,6 +115,7 @@ public class Validation {
         table1 = schema.getTable("publisher");
         String publisher = table1.getValue("name", 0);
         result &= validTest(target, publisher, log);
+        System.out.println("publisher test OK? " + result);
         // dataset dataset_type
         target = "name";
         table = schema.getTable("type");
@@ -123,6 +124,7 @@ public class Validation {
         target = "relationship";
         table = schema.getTable("relation");
         result &= validTestfordoirelationship(table, target, log);
+        System.out.println("relation test OK? " + result);
         // dataset ext_acc-mirror
         log = "prefix error";
         target = "link";
@@ -134,16 +136,18 @@ public class Validation {
         String submitter_email = table.getValue(target, 0);
         String regex = cvMap.get(target).get(0);
         result &= regexTest(regex, submitter_email, target, log);
+        System.out.println("email test OK? " + result);
 
         target = "attribute_id";
         table = schema.getTable("sample_attribute");
         result &= attribute_id_Test(table, target);
+        System.out.println("attribute_id test OK? " + result);
         // author_name
         target = "name";
         table = schema.getTable("author");
         regex = cvMap.get("author_name").get(0);
         result &= regexTest(table, target, regex, log);
-        System.out.println("author_name test OK");
+        System.out.println("author_name test OK? " + result);
         // project url
         target = "project_url";
         table = schema.getTable("project");
@@ -152,7 +156,7 @@ public class Validation {
         result &= accessTest(table, target, prefix, log);
         // determine if the url is in the database or not
         result &= uniqueProjectNameTest(table);
-        System.out.println("project test OK");
+        System.out.println("project test OK? " + result);
         //project image_location
         target = "image_location";
         table = schema.getTable("project");
@@ -161,7 +165,7 @@ public class Validation {
             System.out.println("this is image_location    " + image_location);
             result &= validTestforprojectimage(target, image_location, log);
         }
-        System.out.println("image test OK");
+        System.out.println("image test OK? "+ result);
 
         // sample id
         table = schema.getTable("sample");
@@ -176,7 +180,7 @@ public class Validation {
         target = "file_type";
         table = schema.getTable("file");
         result &= validTest(table, target, log, "file_name");
-        System.out.println("file_type test OK");
+        System.out.println("file_type test OK? "+result);
 
         // file
 
@@ -198,7 +202,7 @@ public class Validation {
         //	set_modifi(table,target,latest_time);
 
 
-        System.out.println("Finished validation OK");
+        System.out.println("Finished validation OK? "+ result);
 
         return result;
 
