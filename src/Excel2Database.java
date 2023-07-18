@@ -1283,6 +1283,8 @@ public class Excel2Database {
                                 // String message = "Sample_attribute;;" + value.trim() + ";;" + att_id;
                                 // curationlog.add(message);
                                 System.out.println("****************************Attribute name: " + value + " not found in attribute table! " + att_id);
+                            } else {
+                                System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&Attribute name: " + value + " found in attribute table! " + att_id);
                             }
                             attributes_id.add(att_id);
                         }
