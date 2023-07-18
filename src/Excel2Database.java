@@ -1025,12 +1025,10 @@ public class Excel2Database {
                         }
                         int att_id = database.getattribute_id(temp1[0]);
                         if (att_id == 0) {
-
-                            att_id = database.add_attribute(temp1[0]);
-                            System.out.println("！！！！！！！！！！！！！！！new add: " + temp1[0] + " " + att_id);
-
-                            curationlog.add("File_attribute;;" + temp1[0] + ";;" + att_id);
-
+                            // att_id = database.add_attribute(temp1[0]);
+                            // System.out.println("！！！！！！！！！！！！！！！new add: " + temp1[0] + " " + att_id);
+                            // curationlog.add("File_attribute;;" + temp1[0] + ";;" + att_id);
+                            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~Attribute name: " + temp1[0] + " not found in attribute table! " + att_id);
                         }
 
 
@@ -1280,12 +1278,11 @@ public class Excel2Database {
                             //System.out.println("one"+ value);
                             int att_id = database.getattribute_id(value.trim());
                             if (att_id == 0) {
-
-                                att_id = database.add_attribute(value.trim());
-                                System.out.println("！！！！！！！！！！！！！！！new add: " + value + " " + att_id);
-                                String message = "Sample_attribute;;" + value.trim() + ";;" + att_id;
-                                curationlog.add(message);
-
+                                // att_id = database.add_attribute(value.trim());
+                                // System.out.println("！！！！！！！！！！！！！！！new add: " + value + " " + att_id);
+                                // String message = "Sample_attribute;;" + value.trim() + ";;" + att_id;
+                                // curationlog.add(message);
+                                System.out.println("****************************Attribute name: " + value + " not found in attribute table! " + att_id);
                             }
                             attributes_id.add(att_id);
                         }
