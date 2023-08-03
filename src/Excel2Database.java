@@ -1025,10 +1025,9 @@ public class Excel2Database {
                         }
                         int att_id = database.getattribute_id(temp1[0]);
                         if (att_id == 0) {
-                            // att_id = database.add_attribute(temp1[0]);
-                            // System.out.println("！！！！！！！！！！！！！！！new add: " + temp1[0] + " " + att_id);
-                            // curationlog.add("File_attribute;;" + temp1[0] + ";;" + att_id);
-                            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~Attribute name: " + temp1[0] + " not found in attribute table! " + att_id);
+                            att_id = database.add_attribute(temp1[0]);
+                            System.out.println("！！！！！！！！！！！！！！！new add: " + temp1[0] + " " + att_id);
+                            curationlog.add("File_attribute;;" + temp1[0] + ";;" + att_id);
                         }
 
 
